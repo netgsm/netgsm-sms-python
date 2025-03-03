@@ -32,7 +32,7 @@ dev_requires = [
 ]
 
 setup(
-    name='netgsm',
+    name='netgsm-sms',
     version=version,
     description='Netgsm Python SDK for SMS API',
     long_description=long_description,
