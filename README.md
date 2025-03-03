@@ -5,7 +5,7 @@ Official Python SDK for Netgsm SMS API. With this SDK, you can send SMS, cancel 
 ## Installation
 
 ```bash
-pip install netgsm
+pip install netgsm-sms
 ```
 
 ## Usage

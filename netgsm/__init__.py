@@ -19,7 +19,7 @@ from .exceptions.api_exception import (
     ServerException,
 )
 
-__version__ = "0.1.0"
+__version__ = "1.1.2"
 __author__ = "Netgsm"
 __license__ = "MIT"
 
