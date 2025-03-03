@@ -13,7 +13,7 @@ This document is a comprehensive resource for the Netgsm Python SDK. It contains
 ## Installation
 
 ```bash
-pip install netgsm
+pip install netgsm-sms
 ```
 
 ## Authentication
