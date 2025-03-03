@@ -1,0 +1,60 @@
+name: Python Package
+
+on:
+  push:
+    branches: [ main ]
+  pull_request:
+    branches: [ main ]
+
+jobs:
+  build:
+    runs-on: ${{ matrix.os }}
+    strategy:
+      fail-fast: false
+      matrix:
+        os: [ubuntu-latest, windows-latest]
+        python-version: ["3.7", "3.8", "3.9", "3.10", "3.11"]
+
+    steps:
+    - uses: actions/checkout@v3
+    
+    - name: Set up Python ${{ matrix.python-version }}
+      uses: actions/setup-python@v4
+      with:
+        python-version: ${{ matrix.python-version }}
+    
+    - name: Set Python Command (Windows)
+      if: runner.os == 'Windows'
+      run: |
+        echo "PYTHON_CMD=py" >> $GITHUB_ENV
+      shell: bash
+    
+    - name: Set Python Command (Unix)
+      if: runner.os != 'Windows'
+      run: |
+        echo "PYTHON_CMD=python3" >> $GITHUB_ENV
+      shell: bash
+    
+    - name: Install dependencies
+      run: |
+        ${{ env.PYTHON_CMD }} -m pip install --upgrade pip
+        ${{ env.PYTHON_CMD }} -m pip install flake8 pytest pytest-cov black
+        ${{ env.PYTHON_CMD }} -m pip install -e ".[dev]"
+      shell: bash
+    
+    - name: Lint code
+      run: |
+        ${{ env.PYTHON_CMD }} scripts/lint.py netgsm
+        ${{ env.PYTHON_CMD }} scripts/lint.py tests
+        ${{ env.PYTHON_CMD }} scripts/lint.py examples
+      shell: bash
+    
+    - name: Run tests
+      run: |
+        ${{ env.PYTHON_CMD }} -m pytest --cov=netgsm tests/
+      shell: bash
+    
+    - name: Upload coverage to Codecov
+      uses: codecov/codecov-action@v3
+      with:
+        fail_ci_if_error: true 
