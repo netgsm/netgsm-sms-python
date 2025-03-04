@@ -7,7 +7,7 @@ from unittest import mock
 import os
 from dotenv import load_dotenv
 from netgsm import Netgsm
-from netgsm.exceptions import ApiException
+from netgsm.exceptions.api_exception import ApiException
 
 
 class TestSmsService(unittest.TestCase):
@@ -68,7 +68,6 @@ class TestSmsService(unittest.TestCase):
         Tests SMS sending failure case.
         """
         # Set up to throw ApiException
-        from netgsm.exceptions.api_exception import ApiException
         mock_post.side_effect = ApiException("API error")
 
         # Specify that we expect an error
