@@ -11,6 +11,7 @@ import uuid
 import time
 from datetime import datetime, timedelta
 from dotenv import load_dotenv
+import pytest
 from netgsm import Netgsm
 from netgsm.exceptions.api_exception import (
     ApiException,
@@ -21,6 +22,7 @@ from netgsm.exceptions.api_exception import (
 )
 
 
+@pytest.mark.integration
 class NetgsmIntegrationTest(unittest.TestCase):
     """
     Integration test class for Netgsm API.

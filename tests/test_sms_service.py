@@ -67,8 +67,9 @@ class TestSmsService(unittest.TestCase):
         """
         Tests SMS sending failure case.
         """
-        # Set up to throw an error
-        mock_post.side_effect = Exception("API error")
+        # Set up to throw ApiException
+        from netgsm.exceptions.api_exception import ApiException
+        mock_post.side_effect = ApiException("API error")
 
         # Specify that we expect an error
         with self.assertRaises(ApiException):

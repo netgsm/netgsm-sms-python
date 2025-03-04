@@ -49,9 +49,9 @@ jobs:
         ${{ env.PYTHON_CMD }} scripts/lint.py examples
       shell: bash
     
-    - name: Run tests
+    - name: Run unit tests
       run: |
-        ${{ env.PYTHON_CMD }} -m pytest --cov=netgsm tests/
+        ${{ env.PYTHON_CMD }} -m pytest --cov=netgsm tests/ -k "not integration" -v
       shell: bash
     
     - name: Upload coverage to Codecov
